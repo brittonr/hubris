@@ -282,6 +282,7 @@
         packages =
           [
             hubrisToolchain
+            humilityPackage
           ]
           ++ commonBuildInputs
           ++ debugTools;
@@ -295,15 +296,18 @@
         shellHook = ''
           echo "Hubris development environment"
           echo "Rust: $(rustc --version)"
+          echo "Humility: $(humility --version 2>/dev/null || echo 'available')"
           echo ""
           echo "Available commands:"
           echo "  cargo xtask dist <app.toml>    - Build a distribution image"
           echo "  cargo xtask build <app.toml>   - Build single task(s)"
           echo "  cargo xtask flash <app.toml>   - Flash to hardware"
           echo "  cargo xtask clippy <app.toml>  - Run clippy"
+          echo "  humility -a <archive> <cmd>    - Debug/inspect running Hubris"
           echo ""
           echo "Example:"
           echo "  cargo xtask dist app/demo-stm32f4-discovery/app.toml"
+          echo "  cargo xtask flash app/demo-stm32f4-discovery/app.toml"
         '';
       };
 
